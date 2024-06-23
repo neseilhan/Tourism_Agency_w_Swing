@@ -1,2 +1,11 @@
-package PACKAGE_NAME;public class App {
+import core.Db;
+import view.LoginView;
+
+public class App {
+
+    public static void main(String[] args) {
+
+        LoginView login = new LoginView();
+
+    }
 }
