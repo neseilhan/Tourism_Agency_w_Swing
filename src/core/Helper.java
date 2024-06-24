@@ -66,12 +66,34 @@ public class Helper {
         return JOptionPane.showConfirmDialog(null,msg,"Confirm Delete", JOptionPane.YES_NO_OPTION) == 0;
     }
 
-    public static boolean isFieldEmpty(JTextField field){
-        return field.getText().trim().isEmpty(); // if its empty return true.
+//    public static boolean isFieldEmpty(JTextField field){
+//        return field.getText().trim().isEmpty(); // if its empty return true.
+//    }
+    public static boolean isFieldEmpty(JTextField... fields) {
+        for (JTextField field : fields) {
+            if (field.getText().trim().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
-    public static boolean isFieldListEmpty(JTextField[] fieldlist){
-        for(JTextField field : fieldlist){
+
+    public static boolean isFieldListEmpty(JTextField[]... fieldlist){
+        for(JTextField[] field : fieldlist){
             if(isFieldEmpty(field)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public static boolean isComboBoxEmpty(JComboBox comboBox) {
+        return comboBox.getSelectedItem() == null;
+    }
+    public static boolean isComboBoxListEmpty(JComboBox[] fieldlist){
+        for(JComboBox field : fieldlist){
+            if(isComboBoxEmpty(field)) {
                 return true;
             }
         }

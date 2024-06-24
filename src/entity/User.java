@@ -4,7 +4,7 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private String role;
+    private UserRole role;
 
     public User(){
 
@@ -14,7 +14,7 @@ public class User {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.role = UserRole.valueOf(role);
     }
 
     public int getId() {
@@ -41,11 +41,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
@@ -55,7 +55,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
+                ", role=" + role +
                 '}';
     }
 }

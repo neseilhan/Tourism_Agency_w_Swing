@@ -3,6 +3,8 @@ package view;
 import business.UserManager;
 import core.Helper;
 import entity.User;
+import entity.UserRole;
+
 
 import javax.swing.*;
 
@@ -14,9 +16,10 @@ public class LoginView extends Layout {
     private JLabel lbl_username;
     private JTextField fld_username;
     private JLabel lbl_pass;
-    private JTextField fld_pass;
     private JButton btn_login;
     private JPanel container;
+    private JButton btn_exit;
+    private JPasswordField fld_pass;
     private final UserManager userManager;
 
     public LoginView(){ //loginView constructor.
@@ -36,14 +39,30 @@ public class LoginView extends Layout {
                 if(loginUser == null ){
                     Helper.showMsg("notFound");
                 }
-                else{
-////                    System.out.println(loginUser.toString());
-//                    AdminView adminView = new AdminView(loginUser);
-//                    dispose();
-                    System.out.println("Login Successful");
+            else{
+                UserRole role = loginUser.getRole();
+                switch (role){
+                    case ADMIN -> openAdminView(loginUser);
+                    case EMPLOYEE -> openEmployeeView(loginUser);
+                    default -> throw new IllegalArgumentException();
                 }
             }
-
+        }
         });
+
+        btn_exit.addActionListener(e -> {
+            System.exit(0);
+        });
+    }
+    private void openAdminView(User user){
+        AdminView adminView = new AdminView(user);
+        this.setVisible(true);
+        dispose();
+    }
+
+    private void openEmployeeView(User user){
+        EmployeeView employeeView = new EmployeeView();
+        this.setVisible(true);
+        dispose();
     }
 }

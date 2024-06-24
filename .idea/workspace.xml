@@ -4,19 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c6a8676-1819-4b0a-99cd-a44cede6a62a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/business/UserManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/Helper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/UserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/UserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/Layout.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/LoginView.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
+    <list default="true" id="8c6a8676-1819-4b0a-99cd-a44cede6a62a" name="Changes" comment="Login tab created.">
+      <change afterPath="$PROJECT_DIR$/src/view/AdminView.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/AdminView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/EmployeeView.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/EmployeeView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/UserView.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/UserView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TourismAgency.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TourismAgency.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Db.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Db.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/business/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/UserManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Helper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +36,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2iKHOuivHaYp4wqxJ6fVxyqcxXK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -44,10 +52,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/IdeaProjects/TourismAgency/postgresql-42.7.3.jar",
+    "last_opened_file_path": "D:/IdeaProjects/TourismAgency",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -65,6 +74,27 @@
       <option name="presentableId" value="Default" />
       <updated>1719159898841</updated>
     </task>
+    <task id="LOCAL-00001" summary="Login tab created.">
+      <option name="closed" value="true" />
+      <created>1719173125312</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719173125312</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Login tab created.">
+      <option name="closed" value="true" />
+      <created>1719173237303</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719173237303</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Login tab created." />
+    <option name="LAST_COMMIT_MESSAGE" value="Login tab created." />
   </component>
 </project>
