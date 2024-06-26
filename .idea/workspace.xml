@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c6a8676-1819-4b0a-99cd-a44cede6a62a" name="Changes" comment="User page and registration tab added.">
-      <change afterPath="$PROJECT_DIR$/src/business/HotelManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/HotelDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/Hotel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/EmployeeView.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/EmployeeView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/HotelView.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/HotelView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Helper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Layout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Layout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
-    </list>
+    <list default="true" id="8c6a8676-1819-4b0a-99cd-a44cede6a62a" name="Changes" comment="hotel tab added and hotels listed." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,7 +36,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/IdeaProjects/RentACar",
+    "last_opened_file_path": "D:/IdeaProjects/TourismAgency",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -95,12 +82,21 @@
       <option name="project" value="LOCAL" />
       <updated>1719259771514</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="hotel tab added and hotels listed.">
+      <option name="closed" value="true" />
+      <created>1719427228556</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1719427228556</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Login tab created." />
     <MESSAGE value="User page and registration tab added." />
-    <option name="LAST_COMMIT_MESSAGE" value="User page and registration tab added." />
+    <MESSAGE value="hotel tab added and hotels listed." />
+    <option name="LAST_COMMIT_MESSAGE" value="hotel tab added and hotels listed." />
   </component>
 </project>
