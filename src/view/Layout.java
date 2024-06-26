@@ -21,7 +21,7 @@ public class Layout extends JFrame {
         table.setModel(model);
         table.getTableHeader().setReorderingAllowed(false);
         table.getColumnModel().getColumn(0).setMaxWidth(75);
-//        table.setEnabled(false);
+        table.setEnabled(false);
 
         DefaultTableModel clearModel = (DefaultTableModel) table.getModel();
         clearModel.setRowCount(0);

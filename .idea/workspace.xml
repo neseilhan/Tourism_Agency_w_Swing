@@ -4,21 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c6a8676-1819-4b0a-99cd-a44cede6a62a" name="Changes" comment="Login tab created.">
-      <change afterPath="$PROJECT_DIR$/src/view/AdminView.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/AdminView.java" afterDir="false" />
+    <list default="true" id="8c6a8676-1819-4b0a-99cd-a44cede6a62a" name="Changes" comment="User page and registration tab added.">
+      <change afterPath="$PROJECT_DIR$/src/business/HotelManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/HotelDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/Hotel.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/view/EmployeeView.form" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/view/EmployeeView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/UserView.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/UserView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/HotelView.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/HotelView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/business/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/UserManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Helper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Layout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Layout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,10 +33,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2iKHOuivHaYp4wqxJ6fVxyqcxXK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -52,7 +49,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/IdeaProjects/TourismAgency",
+    "last_opened_file_path": "D:/IdeaProjects/RentACar",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -90,11 +87,20 @@
       <option name="project" value="LOCAL" />
       <updated>1719173237303</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="User page and registration tab added.">
+      <option name="closed" value="true" />
+      <created>1719259771513</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1719259771514</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Login tab created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Login tab created." />
+    <MESSAGE value="User page and registration tab added." />
+    <option name="LAST_COMMIT_MESSAGE" value="User page and registration tab added." />
   </component>
 </project>

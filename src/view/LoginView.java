@@ -61,7 +61,7 @@ public class LoginView extends Layout {
     }
 
     private void openEmployeeView(User user){
-        EmployeeView employeeView = new EmployeeView();
+        EmployeeView employeeView = new EmployeeView(user);
         this.setVisible(true);
         dispose();
     }

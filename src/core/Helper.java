@@ -100,4 +100,13 @@ public class Helper {
         return false;
     }
 
+
+    public static String changeBoolean(boolean entry){
+        if(entry){
+            return "Yes";
+        }else{
+            return "No";
+        }
+    }
+
 }
