@@ -3,20 +3,27 @@ package business;
 import core.Helper;
 import dao.HotelDao;
 import entity.Hotel;
+import entity.Pension;
+import entity.Season;
 
 import java.util.ArrayList;
 
 public class HotelManager {
     private final HotelDao hotelDao;
+    private final PensionManager pensionManager;
+    private final SeasonManager seasonManager;
 
     public HotelManager(){
         this.hotelDao = new HotelDao();
+        this.pensionManager = new PensionManager();
+        this.seasonManager = new SeasonManager();
     }
     public ArrayList<Hotel> findAll(){
         return hotelDao.findAll();
     }
 
-    public Hotel getById(int id) { return this.hotelDao.getByID(id); }
+    public Hotel getById(int id) { return this.hotelDao.getById(id); }
+
 
     public boolean save(Hotel hotel){
         if (this.getById(hotel.getId()) != null) {
@@ -39,6 +46,12 @@ public class HotelManager {
             return false;
         }
         return this.hotelDao.delete(id);
+    }
+    public int saveAndGetHotelId(Hotel hotel) {
+        if (hotel.getId() != 0) {
+            Helper.showMsg("Hotel could not be saved");
+        }
+        return this.hotelDao.saveAndGetHotelId(hotel);
     }
     public ArrayList<Object[]> getForTable(int size, ArrayList<Hotel> modelList){ //To create a query in the table and assign a new value.
         ArrayList<Object[]> hotelObjList = new ArrayList<>();
@@ -64,4 +77,28 @@ public class HotelManager {
         }
         return hotelObjList;
     }
+    public ArrayList<Object[]> getForSeasonTable(int colSize, int selectedHotelId) { //to pull data from the season table
+        ArrayList<Object[]> hotelSeasonRowList = new ArrayList<>();
+        for (Season season : this.seasonManager.getByListHotelId(selectedHotelId)) {
+            Object[] rowObject = new Object[colSize];
+            int i = 0;
+            rowObject[i++] = season.getSeasonName();
+            rowObject[i++] = season.getSeasonStartDate();
+            rowObject[i++] = season.getSeasonEndDate();
+            hotelSeasonRowList.add(rowObject);
+        }
+        return hotelSeasonRowList;
+    }
+
+    public ArrayList<Object[]> getForPensionTable(int colSize, int selectedHotelId) { //to pull data from the pension table
+        ArrayList<Object[]> hotelPensionRowList = new ArrayList<>();
+        for (Pension pension : this.pensionManager.getByListHotelId(selectedHotelId)) {
+            Object[] rowObject = new Object[colSize];
+            int i = 0;
+            rowObject[i++] = pension.getPensionType();
+            hotelPensionRowList.add(rowObject);
+        }
+        return hotelPensionRowList;
+    }
+
 }

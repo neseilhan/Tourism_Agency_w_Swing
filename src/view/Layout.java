@@ -4,6 +4,8 @@ import core.Helper;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -48,5 +50,18 @@ public class Layout extends JFrame {
                 }
             }
         });
+    }
+    public void resizeTable(JTable table, int tableWidth, int tableHeight, double... percentages) {
+        table.setPreferredSize(new Dimension(tableWidth, tableHeight));
+
+        double total = 0;
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            total += percentages[i];
+        }
+
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            TableColumn column = table.getColumnModel().getColumn(i);
+            column.setMaxWidth((int) (tableWidth * (percentages[i] / total)));
+        }
     }
 }

@@ -7,10 +7,7 @@ import entity.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class EmployeeView extends Layout {
@@ -20,6 +17,8 @@ public class EmployeeView extends Layout {
     private Hotel hotel;
     private JPopupMenu hotel_menu = new JPopupMenu();
     private Object[] col_hotel;
+    private DefaultTableModel tmdl_hotel_season = new DefaultTableModel();
+    private DefaultTableModel tmdl_hotel_pension = new DefaultTableModel();
     private DefaultTableModel tmdl_hotel = new DefaultTableModel();
 
     private JPanel container;
@@ -33,8 +32,8 @@ public class EmployeeView extends Layout {
     private JTable tbl_hotel;
     private JPanel pnl_hotel_button;
     private JButton btn_hotel_add;
-    private JPanel pnl_hotel_info;
-    private JPanel pnl_hotel_features;
+    private JPanel pnl_hotel_bot;
+    private JPanel pnl_hotel_pension;
     private JPanel pnl_hotel_season;
     private JPanel pnl_room;
     private JScrollPane scrl_room;
@@ -60,6 +59,10 @@ public class EmployeeView extends Layout {
     private JScrollPane scrl_reservations;
     private JTable tbl_reservations;
     private JPanel pnl_res_button;
+    private JScrollPane scrl_hotel_pension;
+    private JTable tbl_hotel_pension;
+    private JTable tbl_hotel_season;
+    private JScrollPane scrl_hotel_season;
 
 
     public EmployeeView(User user){
@@ -69,11 +72,13 @@ public class EmployeeView extends Layout {
 
         this.lbl_welcome.setText("Welcome " + user.getUsername());
         loadComponent();
-        loadHotelTable(null);
+        loadHotelTable();
         loadHotelComponent();
     }
 
     private void loadComponent() {
+        this.selectHotelRow(this.tbl_hotel);
+
         this.btn_logout_employee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,7 +94,7 @@ public class EmployeeView extends Layout {
             hotelView.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    loadHotelTable(null);
+                    loadHotelTable();
                 }
             });
         });
@@ -104,7 +109,7 @@ public class EmployeeView extends Layout {
             hotelView.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) { //Tables that need to be updated dynamically
-                    loadHotelTable(null);
+                    loadHotelTable();
                 }
             });
         });
@@ -114,7 +119,7 @@ public class EmployeeView extends Layout {
                 int selectedModelId = this.getTableSelectedRow(tbl_hotel, 0);
                 if (this.hotelManager.delete(selectedModelId)) {
                     Helper.showMsg("done");
-                    loadHotelTable(null);
+                    loadHotelTable();
                 } else {
                     Helper.showMsg("error");
                 }
@@ -124,33 +129,36 @@ public class EmployeeView extends Layout {
 
     }
 
-    private void loadHotelTable(ArrayList<Object[]> hotelList)  {
-//        Object[] column = {"ID", "Name", "City", "Region", "Address", "Mail", "Star",
-//                "Car Park", "Spa", "Room Service", "Pool", "Wifi", "Fitness","Concierge"};
-//        if(hotelList == null){
-//            hotelList = this.hotelManager.findAll();
-//        }
-//        DefaultTableModel clearModel = (DefaultTableModel) this.tbl_hotel.getModel();
-//        clearModel.setRowCount(0);
-//        this.tmdl_hotel.setColumnIdentifiers(column);
-        col_hotel = new Object[]{"ID", "Name", "City", "Region", "Address", "Mail", "Star",
+    private void loadHotelTable()  {
+        Object[] col_hotel  ={"ID", "Name", "City", "Region", "Address", "Mail", "Star",
                "Car Park", "Spa", "Room Service", "Pool", "Wifi", "Fitness","Concierge"};
-        if (hotelList == null) {
-            hotelList = this.hotelManager.getForTable(this.col_hotel.length, this.hotelManager.findAll());
-        }
+        ArrayList<Object[]> hotelList = this.hotelManager.getForTable(col_hotel.length, this.hotelManager.findAll());
         this.createTable(this.tmdl_hotel, this.tbl_hotel, col_hotel, hotelList);
+    }
 
-//        for (Hotel hotel : hotelList){
-//            Object[] obj = {hotel.getId(), hotel.getHotel_name(), hotel.getHotel_city(),hotel.getHotel_region(),
-//                    hotel.getHotel_address(), hotel.getHotel_mail(), hotel.getHotel_star(), Helper.changeBoolean(hotel.isHotel_carpark()) ,Helper.changeBoolean(hotel.isHotel_spa()) ,Helper.changeBoolean(hotel.isHotel_room_service()) ,
-//                    Helper.changeBoolean(hotel.isHotel_pool()) ,Helper.changeBoolean(hotel.isHotel_wifi()) ,Helper.changeBoolean(hotel.isHotel_fitness()) ,Helper.changeBoolean(hotel.isHotel_concierge()) };
-//            this.tmdl_hotel.addRow(obj);
-//            tbl_hotel.setModel(tmdl_hotel);
-//            tbl_hotel.getTableHeader().setReorderingAllowed(false);
-//            tbl_hotel.getColumnModel().getColumn(0).setMaxWidth(50);
-            tbl_hotel.setEnabled(true);
-//        }
+    public void loadHotelSeasonTable() {
+        int selectHotelId = this.getTableSelectedRow(this.tbl_hotel, 0);
+        Object[] colHotelSeason = {"Season", "Season Start Date", "Season End Date"};
+        ArrayList<Object[]> seasonList = this.hotelManager.getForSeasonTable(colHotelSeason.length, selectHotelId);
+        this.createTable(this.tmdl_hotel_season, this.tbl_hotel_season, colHotelSeason, seasonList);
+    }
 
-
+    public void loadHotelPensionTable() {
+        int selectHotelId = this.getTableSelectedRow(this.tbl_hotel, 0);
+        Object[] colHotelPension = {"Hotel's Pension"};
+        ArrayList<Object[]> hotelPensionList = this.hotelManager.getForPensionTable(colHotelPension.length, selectHotelId);
+        this.createTable(this.tmdl_hotel_pension, this.tbl_hotel_pension, colHotelPension, hotelPensionList);
+    }
+    public void selectHotelRow(JTable table) {
+            table.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    int selected_row = table.rowAtPoint(e.getPoint());
+                    table.setRowSelectionInterval(selected_row, selected_row);
+                    loadHotelSeasonTable();
+                    loadHotelPensionTable();
+                    resizeTable(tbl_hotel_pension, 200, 145, 100);
+                }
+            });
     }
 }
