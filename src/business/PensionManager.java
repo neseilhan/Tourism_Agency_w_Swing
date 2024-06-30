@@ -18,7 +18,7 @@ public class PensionManager {
     }
 
     public Pension getById(int id) {
-        return this.pensionDao.getByID(id);
+        return this.pensionDao.getById(id);
     }
 
     public ArrayList<Pension> getByListHotelId(int hotelId) {

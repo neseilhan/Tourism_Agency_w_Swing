@@ -2,6 +2,9 @@ package core;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Helper {
     public static void setTheme() {
@@ -106,6 +109,16 @@ public class Helper {
             return "Yes";
         }else{
             return "No";
+        }
+    }
+    public static boolean isValidDate(String inputDate, String formatPattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatPattern);
+
+        try {
+            LocalDate date = LocalDate.parse(inputDate, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
     }
 

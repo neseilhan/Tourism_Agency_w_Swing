@@ -1,8 +1,13 @@
 package view;
 
 import business.HotelManager;
+import business.PensionManager;
+import business.RoomManager;
+import business.SeasonManager;
+import core.ComboItem;
 import core.Helper;
 import entity.Hotel;
+import entity.Room;
 import entity.User;
 
 import javax.swing.*;
@@ -14,67 +19,86 @@ public class EmployeeView extends Layout {
 
     private User user;
     private HotelManager hotelManager;
+    private RoomManager roomManager;
+    private PensionManager pensionManager;
+    private SeasonManager seasonManager;
     private Hotel hotel;
     private JPopupMenu hotel_menu = new JPopupMenu();
     private Object[] col_hotel;
+    private Object[] col_room;
     private DefaultTableModel tmdl_hotel_season = new DefaultTableModel();
     private DefaultTableModel tmdl_hotel_pension = new DefaultTableModel();
     private DefaultTableModel tmdl_hotel = new DefaultTableModel();
+    private DefaultTableModel tmdl_room = new DefaultTableModel();
 
     private JPanel container;
-    private JPanel pnl_welcome;
     private JLabel lbl_welcome;
     private JButton btn_logout_employee;
+    private JTable tbl_hotel;
+    private JButton btn_hotel_add;
+    private JPanel pnl_hotel_bot;
+    private JPanel pnl_hotel_pension;
+    private JTable tbl_hotel_pension;
+    private JTable tbl_hotel_season;
+    private JScrollPane scrl_hotel_season;
+    private JPanel pnl_welcome;
+    private JButton btn_room_res_add;
     private JPanel pnl_tab;
     private JTabbedPane tab_menu;
     private JPanel pnl_hotel;
     private JScrollPane scrl_hotel;
-    private JTable tbl_hotel;
     private JPanel pnl_hotel_button;
-    private JButton btn_hotel_add;
-    private JPanel pnl_hotel_bot;
-    private JPanel pnl_hotel_pension;
+    private JScrollPane scrl_hotel_pension;
     private JPanel pnl_hotel_season;
     private JPanel pnl_room;
     private JScrollPane scrl_room;
     private JTable tbl_room;
-    private JButton btn_room_add;
-    private JButton btn_room_res_add;
     private JPanel pnl_filter_room;
     private JLabel lbl_filter_hotel;
     private JComboBox cmb_filter_hotel;
     private JLabel lbl_filter_city;
     private JComboBox cmb_filter_city;
-    private JLabel lbl_filter_region;
-    private JComboBox cmb_filter_region;
     private JLabel lbl_filter_checkin;
     private JTextField fld_filter_checkin;
     private JLabel lbl_filter_checkout;
     private JTextField fld_filter_checkout;
-    private JLabel lbl_filter_bed;
-    private JTextField fld_filter_bed;
     private JButton btn_reset;
+    private JComboBox cmb_filter_region;
     private JButton btn_search;
+    private JTextField fld_filter_bed;
+    private JLabel lbl_filter_bed;
+    private JButton btn_room_add;
     private JPanel pnl_reserevation;
     private JScrollPane scrl_reservations;
     private JTable tbl_reservations;
     private JPanel pnl_res_button;
-    private JScrollPane scrl_hotel_pension;
-    private JTable tbl_hotel_pension;
-    private JTable tbl_hotel_season;
-    private JScrollPane scrl_hotel_season;
 
 
     public EmployeeView(User user){
         this.add(container);
         this.guiInitialize(1000, 500);
         this.hotelManager = new HotelManager();
+        this.roomManager = new RoomManager();
 
         this.lbl_welcome.setText("Welcome " + user.getUsername());
         loadComponent();
         loadHotelTable();
         loadHotelComponent();
+        loadRoomTable(null);
+      //  loadRoomComponent();
+
+        for (Hotel hotel : this.hotelManager.findAll()) {
+            this.cmb_filter_hotel.addItem(new ComboItem(hotel.getId(), hotel.getHotel_name()));
+        }
+        this.cmb_filter_hotel.setSelectedItem(null);
+
+        for (Hotel hotel : this.hotelManager.findAll()) {
+            this.cmb_filter_city.addItem(new ComboItem(hotel.getId(), hotel.getHotel_city()));
+        }
+        this.cmb_filter_hotel.setSelectedItem(null);
+
     }
+
 
     private void loadComponent() {
         this.selectHotelRow(this.tbl_hotel);
@@ -86,6 +110,70 @@ public class EmployeeView extends Layout {
                 LoginView  loginView = new LoginView();
             }
         });
+        this.btn_room_add.addActionListener(e -> {
+            RoomView roomView = new RoomView(new Room());
+            roomView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadRoomTable(null);
+                }
+            });
+        });
+        this.btn_search.addActionListener(e -> {
+            String selectedCity = null;
+            String selectedHotel = null;
+            String filterStartDate = null;
+            String filterEndDate = null;
+            int filterBed = 0;
+
+            if (!this.fld_filter_bed.getText().isEmpty() && this.fld_filter_bed.getText() != null) {
+                filterBed = Integer.parseInt(this.fld_filter_bed.getText());
+            }
+            if (this.cmb_filter_city.getSelectedItem() != null) {
+                selectedCity = ((ComboItem)this.cmb_filter_city.getSelectedItem()).getValue();
+            }
+            if (this.cmb_filter_hotel.getSelectedItem() != null) {
+                selectedHotel = ((ComboItem)this.cmb_filter_hotel.getSelectedItem()).getValue();
+            }
+
+            if (this.fld_filter_checkin != null && !this.fld_filter_checkin.getText().isEmpty()){
+                if (Helper.isValidDate(fld_filter_checkin.getText(), ("dd.MM.yyyy"))) {
+                    filterStartDate = fld_filter_checkin.getText();
+                }
+            }
+            if (this.fld_filter_checkout != null && !this.fld_filter_checkout.getText().isEmpty()){
+                if (Helper.isValidDate(fld_filter_checkout.getText(), ("dd.MM.yyyy"))) {
+                    filterEndDate = fld_filter_checkout.getText();
+                }
+            }
+
+            ArrayList<Room> roomListBySearch = this.roomManager.searchForRooms(filterStartDate, filterEndDate, selectedCity, selectedHotel, filterBed);
+            ArrayList<Object[]> roomRowListBySearch = this.roomManager.getForTable(this.col_room.length, roomListBySearch);
+            loadRoomTable(roomRowListBySearch);
+        });
+
+        this.btn_reset.addActionListener(e -> {
+            this.cmb_filter_hotel.setSelectedItem(null);
+            this.cmb_filter_city.setSelectedItem(null);
+            this.fld_filter_checkin.setText(null);
+            this.fld_filter_checkout.setText(null);
+            this.fld_filter_bed.setText(null);
+            loadRoomTable(null);
+        });
+
+    }
+
+    private void loadRoomTable(ArrayList<Object[]> roomList){
+
+        col_room = new Object[]{"ID", "Hotel", "Pension", "Type", "Stock", "Season",
+                    "Adult Price", "Child Price", "Bed Capacity", "Room Size", "Television", "Minibar","Game Console","SafeBox","Projection"};
+            if (roomList == null) {
+                roomList = this.roomManager.getForTable(col_room.length, this.roomManager.findAll());
+            }
+            this.createTable(this.tmdl_room, this.tbl_room, col_room, roomList);
+        tbl_room.setModel(tmdl_room);
+        tbl_room.setEnabled(true);
+
     }
     public void loadHotelComponent(){
 
@@ -126,12 +214,25 @@ public class EmployeeView extends Layout {
             }
         });
         this.tbl_hotel.setComponentPopupMenu(hotel_menu);
+        this.btn_room_add.addActionListener(e -> {
+            RoomView roomView = new RoomView(new Room());
+            roomView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadRoomTable(null);
+                }
+            });
+        });
+
 
     }
+//    public void RoomComponent(){
+//
+//    }
 
     private void loadHotelTable()  {
         Object[] col_hotel  ={"ID", "Name", "City", "Region", "Address", "Mail", "Star",
-               "Car Park", "Spa", "Room Service", "Pool", "Wifi", "Fitness","Concierge"};
+                "Car Park", "Spa", "Room Service", "Pool", "Wifi", "Fitness","Concierge"};
         ArrayList<Object[]> hotelList = this.hotelManager.getForTable(col_hotel.length, this.hotelManager.findAll());
         this.createTable(this.tmdl_hotel, this.tbl_hotel, col_hotel, hotelList);
     }
@@ -150,15 +251,15 @@ public class EmployeeView extends Layout {
         this.createTable(this.tmdl_hotel_pension, this.tbl_hotel_pension, colHotelPension, hotelPensionList);
     }
     public void selectHotelRow(JTable table) {
-            table.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    int selected_row = table.rowAtPoint(e.getPoint());
-                    table.setRowSelectionInterval(selected_row, selected_row);
-                    loadHotelSeasonTable();
-                    loadHotelPensionTable();
-                    resizeTable(tbl_hotel_pension, 200, 145, 100);
-                }
-            });
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int selected_row = table.rowAtPoint(e.getPoint());
+                table.setRowSelectionInterval(selected_row, selected_row);
+                loadHotelSeasonTable();
+                loadHotelPensionTable();
+                resizeTable(tbl_hotel_pension, 200, 145, 100);
+            }
+        });
     }
 }

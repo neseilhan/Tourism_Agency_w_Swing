@@ -63,20 +63,22 @@ public class HotelDao {
         return obj;
 
     }
-    public boolean update(Hotel hotel){
+    public boolean update(Hotel hotel){ //There is a problem about updating a hotel.
         String query = "UPDATE public.user SET hotel_name = ?," +
-                " hotel_city = ?," +
-                " hotel_region = ?," +
-                " hotel_address = ?," +
-                " hotel_mail = ?," +
-                " hotel_star = ?, " +
-                "hotel_carpark = ?," +
-                " hotel_spa = ?," +
-                " hotel_room_service = ?, " +
-                "hotel_pool = ?," +
-                " hotel_wifi = ?," +
-                " hotel_fitness = ?," +
-                " hotel_concierge = ?" +
+                "hotel_name, " +
+                "hotel_city, " +
+                "hotel_region, " +
+                "hotel_address, " +
+                "hotel_mail, " +
+                "hotel_star, " +
+                "hotel_carpark, " +
+                "hotel_spa, " +
+                "hotel_room_service, " +
+                "hotel_pool, " +
+                "hotel_wifi, " +
+                "hotel_fitness, " +
+                "hotel_concierge" +
+
                 " WHERE hotel_id = ?";
         try {
             PreparedStatement preparedStatement = this.con.prepareStatement(query);

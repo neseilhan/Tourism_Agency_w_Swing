@@ -16,7 +16,7 @@ public class PensionDao {
         this.connection = Db.getInstance();
     }
 
-    public Pension getByID(int id) {
+    public Pension getById(int id) {
         Pension pension = null;
         String query = "SELECT * FROM public.pension_type WHERE pension_id = ?";
         try {
