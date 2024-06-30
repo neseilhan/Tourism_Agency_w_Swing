@@ -1,35 +1,40 @@
 package view;
 
-import business.HotelManager;
-import business.PensionManager;
-import business.RoomManager;
-import business.SeasonManager;
+import business.*;
 import core.ComboItem;
 import core.Helper;
 import entity.Hotel;
+import entity.Reservation;
 import entity.Room;
 import entity.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class EmployeeView extends Layout {
 
     private User user;
+    private Reservation reservation;
     private HotelManager hotelManager;
     private RoomManager roomManager;
     private PensionManager pensionManager;
     private SeasonManager seasonManager;
+    private ReservationManager reservationManager;
     private Hotel hotel;
     private JPopupMenu hotel_menu = new JPopupMenu();
+    private JPopupMenu reservation_menu = new JPopupMenu();
     private Object[] col_hotel;
     private Object[] col_room;
     private DefaultTableModel tmdl_hotel_season = new DefaultTableModel();
     private DefaultTableModel tmdl_hotel_pension = new DefaultTableModel();
+    private DefaultTableModel tmdl_reservation = new DefaultTableModel();
     private DefaultTableModel tmdl_hotel = new DefaultTableModel();
     private DefaultTableModel tmdl_room = new DefaultTableModel();
+
 
     private JPanel container;
     private JLabel lbl_welcome;
@@ -40,9 +45,10 @@ public class EmployeeView extends Layout {
     private JPanel pnl_hotel_pension;
     private JTable tbl_hotel_pension;
     private JTable tbl_hotel_season;
+    private JTable tbl_reservation;
     private JScrollPane scrl_hotel_season;
     private JPanel pnl_welcome;
-    private JButton btn_room_res_add;
+    private JButton btn_res_add;
     private JPanel pnl_tab;
     private JTabbedPane tab_menu;
     private JPanel pnl_hotel;
@@ -70,7 +76,6 @@ public class EmployeeView extends Layout {
     private JButton btn_room_add;
     private JPanel pnl_reserevation;
     private JScrollPane scrl_reservations;
-    private JTable tbl_reservations;
     private JPanel pnl_res_button;
 
 
@@ -79,12 +84,15 @@ public class EmployeeView extends Layout {
         this.guiInitialize(1000, 500);
         this.hotelManager = new HotelManager();
         this.roomManager = new RoomManager();
+        this.reservationManager = new ReservationManager();
 
-        this.lbl_welcome.setText("Welcome " + user.getUsername());
+//        this.lbl_welcome.setText("Welcome " + user.getUsername());
         loadComponent();
         loadHotelTable();
         loadHotelComponent();
         loadRoomTable(null);
+        loadReservationTable();
+        loadReservationComponent();
       //  loadRoomComponent();
 
         for (Hotel hotel : this.hotelManager.findAll()) {
@@ -95,13 +103,57 @@ public class EmployeeView extends Layout {
         for (Hotel hotel : this.hotelManager.findAll()) {
             this.cmb_filter_city.addItem(new ComboItem(hotel.getId(), hotel.getHotel_city()));
         }
-        this.cmb_filter_hotel.setSelectedItem(null);
+        this.cmb_filter_city.setSelectedItem(null);
 
+    }
+
+    public void loadReservationTable(){
+        Object[] col_res = {"Reservation ID", "Room Id", "Name", "Mail", "Phone", "TC/Passport No", "Start Date", "End Date", "Total Price" , "Reservation Note"};
+        ArrayList<Object[]> reservationList = this.reservationManager.getForTable(col_res.length, this.reservationManager.findAll());
+        this.createTable(this.tmdl_reservation, this.tbl_reservation, col_res, reservationList);
+        tbl_reservation.setModel(tmdl_reservation);
+        tbl_reservation.setEnabled(true);
+
+    }
+    public void loadReservationComponent(){
+
+//        this.tableRowSelect(this.tbl_reservation, reservation_menu); //when its enable the row cannot being choose
+        this.reservation_menu = new JPopupMenu();
+        this.reservation_menu.add("Update").addActionListener(e ->{
+            int selectReservationId = this.getTableSelectedRow(this.tbl_reservation, 0);
+            ReservationView reservationView = new ReservationView(this.reservationManager.getById(selectReservationId));
+            reservationView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) { //Tables that need to be updated dynamically
+                    loadReservationTable();
+                }
+            });
+        });
+
+        this.reservation_menu.add("Delete").addActionListener(e -> {
+            int selectReservationId = this.getTableSelectedRow(this.tbl_reservation, 0);
+            Room room = this.roomManager.getById(this.reservationManager.getById(selectReservationId).getRoomId());
+            int roomStock = room.getRoom_stock();
+
+            if (Helper.confirm("sure")) {
+                if (this.reservationManager.delete(selectReservationId)) {
+                    roomStock += 1;
+                    this.roomManager.updateRoomStock(roomStock, room);
+
+                    Helper.showMsg("Reservation deleted successfully.");
+                    loadReservationTable();
+                    loadRoomTable(null);
+                }
+            }
+        });
+        this.tbl_reservation.setComponentPopupMenu(reservation_menu);
     }
 
 
     private void loadComponent() {
         this.selectHotelRow(this.tbl_hotel);
+        this.selectRow(this.tbl_room);
+        this.selectRow(this.tbl_reservation);
 
         this.btn_logout_employee.addActionListener(new ActionListener() {
             @Override
@@ -150,6 +202,34 @@ public class EmployeeView extends Layout {
             ArrayList<Room> roomListBySearch = this.roomManager.searchForRooms(filterStartDate, filterEndDate, selectedCity, selectedHotel, filterBed);
             ArrayList<Object[]> roomRowListBySearch = this.roomManager.getForTable(this.col_room.length, roomListBySearch);
             loadRoomTable(roomRowListBySearch);
+        });
+        this.btn_res_add.addActionListener(e -> {
+            if (this.fld_filter_checkin.getText().isEmpty() || this.fld_filter_checkout.getText().isEmpty()) {
+                Helper.showMsg("Please fill Check-in and Check-out date");
+            } else {
+                int selectRoomId = this.getTableSelectedRow(this.tbl_room, 0);
+                Reservation reservation = new Reservation();
+                reservation.setRoomId(selectRoomId);
+
+
+                if (Helper.isValidDate(fld_filter_checkin.getText(), ("dd.MM.yyyy"))) {
+                    reservation.setCheckInDate(LocalDate.parse(fld_filter_checkin.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+                }
+
+
+                if (Helper.isValidDate(fld_filter_checkout.getText(), ("dd.MM.yyyy"))) {
+                    reservation.setCheckOutDate(LocalDate.parse(fld_filter_checkout.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+                }
+
+                ReservationView reservationView = new ReservationView(reservation);
+                reservationView.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        loadReservationTable();
+                        loadRoomTable(null);
+                    }
+                });
+            }
         });
 
         this.btn_reset.addActionListener(e -> {
@@ -214,6 +294,7 @@ public class EmployeeView extends Layout {
             }
         });
         this.tbl_hotel.setComponentPopupMenu(hotel_menu);
+
         this.btn_room_add.addActionListener(e -> {
             RoomView roomView = new RoomView(new Room());
             roomView.addWindowListener(new WindowAdapter() {

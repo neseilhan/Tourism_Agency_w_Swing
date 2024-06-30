@@ -51,6 +51,15 @@ public class Layout extends JFrame {
             }
         });
     }
+    public void selectRow(JTable table) {
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int selected_row = table.rowAtPoint(e.getPoint());
+                table.setRowSelectionInterval(selected_row, selected_row);
+            }
+        });
+    }
     public void resizeTable(JTable table, int tableWidth, int tableHeight, double... percentages) {
         table.setPreferredSize(new Dimension(tableWidth, tableHeight));
 

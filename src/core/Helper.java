@@ -121,5 +121,11 @@ public class Helper {
             return false;
         }
     }
+    public class Utils {
+        public static String booleanToYesNoWithPrefix(boolean value, String prefix) {
+            String stringValue = value ? "available" : "not available";
+            return prefix + " " + stringValue;
+        }
+    }
 
 }

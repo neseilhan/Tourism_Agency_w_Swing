@@ -66,5 +66,8 @@ public class RoomManager {
         }
         return roomRowList;
     }
+    public boolean updateRoomStock(int roomStock, Room room){
+        return this.roomDao.updateRoomStock(roomStock, room);
+    }
 
 }

@@ -4,19 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c6a8676-1819-4b0a-99cd-a44cede6a62a" name="Changes" comment="pension and season info listed and linked to hotel info.">
-      <change afterPath="$PROJECT_DIR$/src/business/RoomManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/RoomDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/Room.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/RoomView.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/RoomView.java" afterDir="false" />
+    <list default="true" id="8c6a8676-1819-4b0a-99cd-a44cede6a62a" name="Changes" comment="Reservation tab can list reservations and can be deleted and updated.">
+      <change afterPath="$PROJECT_DIR$/src/business/ReservationManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/ReservationDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/Reservation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/ReservationView.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/ReservationView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/business/PensionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/PensionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/business/RoomManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/RoomManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Helper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/HotelDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/HotelDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/PensionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/PensionDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Hotel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/EmployeeView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EmployeeView.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/EmployeeView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EmployeeView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Layout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Layout.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,19 +42,22 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.App.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "311",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "131",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "515",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/IdeaProjects/TourismAgency1",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+    "settings.editor.selected.configurable": "project.scopes"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -131,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719523270397</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Room tab finished, rooms are listed and can be searched.">
+      <option name="closed" value="true" />
+      <created>1719761960149</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1719761960149</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -139,6 +150,8 @@
     <MESSAGE value="User page and registration tab added." />
     <MESSAGE value="hotel tab added and hotels listed." />
     <MESSAGE value="pension and season info listed and linked to hotel info." />
-    <option name="LAST_COMMIT_MESSAGE" value="pension and season info listed and linked to hotel info." />
+    <MESSAGE value="Room tab finished, rooms are listed and can be searched." />
+    <MESSAGE value="Reservation tab can list reservations and can be deleted and updated." />
+    <option name="LAST_COMMIT_MESSAGE" value="Reservation tab can list reservations and can be deleted and updated." />
   </component>
 </project>

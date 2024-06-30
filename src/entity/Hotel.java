@@ -16,9 +16,7 @@ public class Hotel {
     private boolean hotel_fitness;
     private boolean hotel_concierge;
 
-    public Hotel(){
 
-    }
 
     public Hotel(int id, String hotel_name, String hotel_city, String hotel_region, String hotel_address, String hotel_mail, String hotel_star, boolean hotel_carpark, boolean hotel_spa, boolean hotel_room_service, boolean hotel_pool, boolean hotel_wifi, boolean hotel_fitness, boolean hotel_concierge) {
         this.id = id;
@@ -37,6 +35,9 @@ public class Hotel {
         this.hotel_concierge = hotel_concierge;
     }
 
+    public Hotel(){
+
+    }
     public int getId() {
         return id;
     }
