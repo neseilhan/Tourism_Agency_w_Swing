@@ -14,14 +14,14 @@ PostgreSQL
 Kurulum
 Projeyi Klonlayın:
 
-git clone https://github.com/kullaniciAdi/tourismAgency.git
+git clone https://github.com/kullaniciAdi/TourismAgency.git
 cd tourismAgency
 
 Veritabanını Ayarlayın:
 
 Install and run PostgreSQL.
 Update the database connection information in the src/core/Db.java file according to your own PostgreSQL settings.
-Create your database using the tourismAgency.sql file in the GitHub repository and return it with the following commands.
+Create your database using the turizm.sql file in the GitHub repository and return it with the following commands.
 psql -U postgres -f tourismAgency.sql
 
 Compile and Run the Project:
