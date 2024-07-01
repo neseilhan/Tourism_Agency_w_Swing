@@ -11,13 +11,11 @@ Used technologies :
 Java
 Swing GUI
 PostgreSQL
-Kurulum
-Projeyi Klonlayın:
 
-git clone https://github.com/kullaniciAdi/TourismAgency.git
-cd tourismAgency
+Clone the project:
+git clone https://github.com/neseilhan/Tourism_Agency_w_Swing.git
 
-Veritabanını Ayarlayın:
+Set up database:
 
 Install and run PostgreSQL.
 Update the database connection information in the src/core/Db.java file according to your own PostgreSQL settings.
