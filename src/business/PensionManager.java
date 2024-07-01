@@ -1,5 +1,6 @@
 package business;
 
+import core.Db;
 import core.Helper;
 import dao.PensionDao;
 import entity.Pension;
@@ -31,4 +32,8 @@ public class PensionManager {
         }
         return this.pensionDao.save(pension);
     }
+    public ArrayList<Pension> getByHotelId(int hotelId) {
+        return pensionDao.getByHotelId(hotelId);
+    }
+
 }

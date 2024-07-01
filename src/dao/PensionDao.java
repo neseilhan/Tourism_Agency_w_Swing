@@ -78,4 +78,48 @@ public class PensionDao {
         }
         return pensionList;
     }
+    public ArrayList<Pension> getByHotelId(int hotelId) {
+        ArrayList<Pension> pensions = new ArrayList<>();
+        String query = "SELECT * FROM public.pension_type WHERE pension_hotel_id = ?";
+        try {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1, hotelId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Pension pension = new Pension();
+                pension.setPensionId(resultSet.getInt("pension_id"));
+                pension.setPensionType(resultSet.getString("pension_type"));
+                pension.setHotelId(resultSet.getInt("pension_hotel_id"));
+                pensions.add(pension);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pensions;
+    }
+
+//    public void deleteByHotelId(int hotelId) {
+//        String sql = "DELETE FROM public.pension_type WHERE pension_hotel_id = ?";
+//        try (Connection conn = Db.getInstance();
+//             PreparedStatement pr = conn.prepareStatement(sql)) {
+//            pr.setInt(1, hotelId);
+//            pr.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    public void saveAll(ArrayList<Pension> pensions) {
+//        String sql = "INSERT INTO public.pension_type (pension_hotel_id, pension_type) VALUES (?, ?)";
+//        try (Connection conn = Db.getInstance();
+//             PreparedStatement pr = conn.prepareStatement(sql)) {
+//            for (Pension pension : pensions) {
+//                pr.setInt(1, pension.getHotelId());
+//                pr.setString(2, pension.getPensionType());
+//                pr.addBatch();
+//            }
+//            pr.executeBatch();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

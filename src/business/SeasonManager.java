@@ -27,4 +27,10 @@ public class SeasonManager {
         }
         return this.seasonDao.save(season);
     }
+    public ArrayList<Season> getByHotelId(int hotelId) {
+        return seasonDao.getByHotelId(hotelId);
+    }
+
+
+
 }

@@ -1,6 +1,7 @@
 package dao;
 
 import core.Db;
+import entity.Pension;
 import entity.Season;
 
 import java.sql.*;
@@ -84,4 +85,53 @@ public class SeasonDao {
         }
         return pensionList;
     }
+
+    public ArrayList<Season> getByHotelId(int hotelId) {
+        ArrayList<Season> seasons = new ArrayList<>();
+        String query = "SELECT * FROM public.season WHERE season_hotel_id = ?";
+        try {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1, hotelId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Season season = new Season();
+                season.setSeasonId(resultSet.getInt("season_id"));
+                season.setSeasonName(resultSet.getString("season_name"));
+                season.setSeasonStartDate(resultSet.getDate("season_start_date").toLocalDate());
+                season.setSeasonEndDate(resultSet.getDate("season_end_date").toLocalDate());
+                season.setHotelId(resultSet.getInt("season_hotel_id"));
+                seasons.add(season);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return seasons;
+    }
+
+//    public void deleteByHotelId(int hotelId) {
+//        String sql = "DELETE FROM public.season WHERE season_hotel_id = ?";
+//        try (Connection conn = Db.getInstance();
+//             PreparedStatement pr = conn.prepareStatement(sql)) {
+//            pr.setInt(1, hotelId);
+//            pr.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    public void saveAll(ArrayList<Season> seasons) {
+//        String sql = "INSERT INTO public.season (pension_hotel_id, pension_type) VALUES (?, ?)";
+//        try (Connection conn = Db.getInstance();
+//             PreparedStatement pr = conn.prepareStatement(sql)) {
+//            for (Season season : seasons) {
+//                pr.setInt(1, season.getHotelId());
+//                pr.setString(2, season.getSeasonName());
+//                pr.addBatch();
+//            }
+//            pr.executeBatch();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
 }

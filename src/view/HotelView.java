@@ -65,25 +65,52 @@ public class HotelView extends Layout {
         this.loadSeasonCheckBoxListener();
         this.add(container);
         this.guiInitialize(500, 500);
+        populateHotelDetails();
 
         this.cmb_hotel_star.setModel(new DefaultComboBoxModel<>());
         String[] stars = {"1", "2", "3", "4", "5"};
 
-        for (int i = 0; i < stars.length; i++) {
-            cmb_hotel_star.addItem(stars[i]);
+//        for (int i = 0; i < stars.length; i++) {
+//            cmb_hotel_star.addItem(stars[i]);
+//        }
+        for (String star : stars) {
+            cmb_hotel_star.addItem(star);
         }
 
+
+
         this.btn_save_hotel.addActionListener(e -> {
-            if (Helper.isFieldListEmpty(new JTextField[]{this.fld_hotel_name, this.fld_hotel_city, this.fld_hotel_region, this.fld_hotel_mail}) ||
-                    Helper.isComboBoxListEmpty(new JComboBox[]{this.cmb_hotel_star})) {
-                Helper.showMsg("fill");
+
+            // Pension türlerini kontrol etmek için
+            boolean isPensionEmpty = true;
+            if (ultraAllInclusiveRadiobutton.isSelected() ||
+                    allInclusiveRadioButton.isSelected() ||
+                    roomBreakfastRadioButton.isSelected() ||
+                    fullPensionRadioButton.isSelected() ||
+                    halfPensionRadioButton.isSelected() ||
+                    justBedRadioButton.isSelected() ||
+                    excludingAlcoholFullCreditRadioButton.isSelected()) {
+                isPensionEmpty = false;
+            }
+            // Season seçimlerini kontrol etmek için
+            boolean isSeasonEmpty = true;
+            if (summerRadioButton.isSelected() || winterRadioButton.isSelected()) {
+                isSeasonEmpty = false;
+            }
+
+            if (Helper.isFieldListEmpty(new JTextField[]{this.fld_hotel_name, this.fld_hotel_city, this.fld_hotel_region, this.fld_hotel_mail }) ||
+                    Helper.isComboBoxListEmpty(new JComboBox[]{this.cmb_hotel_star}) ||
+                    isPensionEmpty || isSeasonEmpty) {
+                Helper.showMsg("Fill all required fields.");
             } else {
                 boolean result = false;
+
+                // Update hotel object with UI inputs
                 this.hotel.setHotel_name(fld_hotel_name.getText());
                 this.hotel.setHotel_city(fld_hotel_city.getText());
                 this.hotel.setHotel_region(fld_hotel_region.getText());
                 this.hotel.setHotel_address(fld_hotel_address.getText());
-                this.hotel.setHotel_mail(fld_hotel_mail.getText());
+                this.hotel.setHotel_phone(fld_hotel_mail.getText());
                 this.hotel.setHotel_star(cmb_hotel_star.getSelectedItem().toString());
                 this.hotel.setHotel_spa(this.rdo_spa.isSelected());
                 this.hotel.setHotel_concierge(this.rdo_concierge.isSelected());
@@ -93,32 +120,101 @@ public class HotelView extends Layout {
                 this.hotel.setHotel_fitness(this.rdo_fitness.isSelected());
                 this.hotel.setHotel_carpark(this.rdo_carpark.isSelected());
 
-                int hotelId = this.hotelManager.saveAndGetHotelId(this.hotel);
+                int hotelId = this.hotel.getId();
 
-                // Add Pension
-                savePension(hotelId);
+                // Determine if the hotel already exists (has an ID) or is new (ID is 0)
+                if (hotelId == 0) {
+                    // Save new hotel
+                    hotelId = this.hotelManager.saveAndGetHotelId(this.hotel);
 
-                // Add season
-                saveSeason(hotelId);
-
-                if (this.hotel.getId() == 0) {
-                    result = this.hotelManager.save(this.hotel);
+                    if (hotelId != 0) {
+//                        // Add Pension and Season for new hotel
+                        savePension(hotelId);
+                        saveSeason(hotelId);
+                        result = true;
+                    }
                 } else {
+                    // Update existing hotel
                     result = this.hotelManager.update(this.hotel);
+
+                    if (result) {
+                        // Update Pension and Season if needed
+//                        savePension(hotelId);
+//                        saveSeason(hotelId);
+                    }
                 }
 
                 if (result) {
-                    Helper.showMsg("done");
-                    dispose();
+                    Helper.showMsg("Hotel information saved successfully.");
+                    dispose(); // Close the window after successful save or update
                 } else {
-                    Helper.showMsg("error");
+                    Helper.showMsg("Error occurred while saving hotel information.");
                 }
             }
-
         });
 
     }
 
+    private void populateHotelDetails() { //To fill the fields for hotel update screen.
+        this.fld_hotel_name.setText(this.hotel.getHotel_name());
+        this.fld_hotel_city.setText(this.hotel.getHotel_city());
+        this.fld_hotel_region.setText(this.hotel.getHotel_region());
+        this.fld_hotel_address.setText(this.hotel.getHotel_address());
+        this.fld_hotel_mail.setText(this.hotel.getHotel_phone());
+        this.cmb_hotel_star.setSelectedItem(this.hotel.getHotel_star());
+        this.rdo_spa.setSelected(this.hotel.isHotel_spa());
+        this.rdo_concierge.setSelected(this.hotel.isHotel_concierge());
+        this.rdo_wifi.setSelected(this.hotel.isHotel_wifi());
+        this.rdo_pool.setSelected(this.hotel.isHotel_pool());
+        this.rdo_roomservice.setSelected(this.hotel.isHotel_room_service());
+        this.rdo_fitness.setSelected(this.hotel.isHotel_fitness());
+        this.rdo_carpark.setSelected(this.hotel.isHotel_carpark());
+        // this.ultraAllInclusiveRadiobutton.setSelected();
+
+            // Set pension fields
+        ArrayList<Pension> pensions = this.pensionManager.getByHotelId(this.hotel.getId());
+        for (Pension pension : pensions) {
+            switch (pension.getPensionType()) {
+                case "Ultra All Inclusive":
+                    this.ultraAllInclusiveRadiobutton.setSelected(true);
+                    break;
+                case "All Inclusive":
+                    this.allInclusiveRadioButton.setSelected(true);
+                    break;
+                case "Room Breakfast":
+                    this.roomBreakfastRadioButton.setSelected(true);
+                    break;
+                case "Full Pension":
+                    this.fullPensionRadioButton.setSelected(true);
+                    break;
+                case "Half Pension":
+                    this.halfPensionRadioButton.setSelected(true);
+                    break;
+                case "Just Bed":
+                    this.justBedRadioButton.setSelected(true);
+                    break;
+                case "Excluding Alcohol Full Credit":
+                    this.excludingAlcoholFullCreditRadioButton.setSelected(true);
+                    break;
+                // Add cases for other pension types if needed
+            }
+        }
+
+//        // Populate season checkboxes based on existing data
+        ArrayList<Season> seasons = this.seasonManager.getByHotelId(this.hotel.getId());
+        for (Season season : seasons) {
+            switch (season.getSeasonName()) {
+                case "Winter":
+                    winterRadioButton.setSelected(true);
+                    break;
+                case "Summer":
+                    summerRadioButton.setSelected(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
         public void savePension ( int hotelId){
             for (String pensionType : hotelPensionList) {
                 Pension pension = new Pension();

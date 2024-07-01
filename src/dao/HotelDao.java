@@ -50,7 +50,7 @@ public class HotelDao {
         obj.setHotel_city(rs.getString("hotel_city"));
         obj.setHotel_region((rs.getString("hotel_region")));
         obj.setHotel_address((rs.getString("hotel_address")));
-        obj.setHotel_mail((rs.getString("hotel_mail")));
+        obj.setHotel_phone((rs.getString("hotel_phone")));
         obj.setHotel_star((rs.getString("hotel_star")));
         obj.setHotel_carpark((rs.getBoolean("hotel_carpark")));
         obj.setHotel_spa((rs.getBoolean("hotel_spa")));
@@ -64,25 +64,26 @@ public class HotelDao {
 
     }
     public boolean update(Hotel hotel){ //There is a problem about updating a hotel.
-        String query = "UPDATE public.user SET hotel_name = ?," +
-                "hotel_name, " +
-                "hotel_city, " +
-                "hotel_region, " +
-                "hotel_address, " +
-                "hotel_mail, " +
-                "hotel_star, " +
-                "hotel_carpark, " +
-                "hotel_spa, " +
-                "hotel_room_service, " +
-                "hotel_pool, " +
-                "hotel_wifi, " +
-                "hotel_fitness, " +
-                "hotel_concierge" +
+        String query = "UPDATE public.hotel SET " +
+                "hotel_name = ?," +
+                "hotel_city = ?, " +
+                "hotel_region = ?, " +
+                "hotel_address = ?, " +
+                "hotel_phone = ?, " +
+                "hotel_star = ?, " +
+                "hotel_carpark = ?, " +
+                "hotel_spa = ?, " +
+                "hotel_room_service = ?, " +
+                "hotel_pool = ?, " +
+                "hotel_wifi = ?, " +
+                "hotel_fitness = ?, " +
+                "hotel_concierge = ?" +
 
                 " WHERE hotel_id = ?";
         try {
             PreparedStatement preparedStatement = this.con.prepareStatement(query);
             setHotelValues(hotel, preparedStatement);
+            preparedStatement.setInt(14, hotel.getId()); // hotel_id set here
             return preparedStatement.executeUpdate() != -1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,7 +98,7 @@ public class HotelDao {
                 "hotel_city, " +
                 "hotel_region, " +
                 "hotel_address, " +
-                "hotel_mail, " +
+                "hotel_phone, " +
                 "hotel_star, " +
                 "hotel_carpark, " +
                 "hotel_spa, " +
@@ -125,7 +126,7 @@ public class HotelDao {
                 "hotel_city, " +
                 "hotel_region, " +
                 "hotel_address, " +
-                "hotel_mail, " +
+                "hotel_phone, " +
                 "hotel_star, " +
                 "hotel_carpark, " +
                 "hotel_spa, " +
@@ -173,7 +174,7 @@ public class HotelDao {
         preparedStatement.setString(2,hotel.getHotel_city());
         preparedStatement.setString(3,hotel.getHotel_region());
         preparedStatement.setString(4,hotel.getHotel_address());
-        preparedStatement.setString(5,hotel.getHotel_mail());
+        preparedStatement.setString(5,hotel.getHotel_phone());
         preparedStatement.setString(6,hotel.getHotel_star());
         preparedStatement.setBoolean(7,hotel.isHotel_carpark());
         preparedStatement.setBoolean(8,hotel.isHotel_spa());

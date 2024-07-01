@@ -86,7 +86,7 @@ public class EmployeeView extends Layout {
         this.roomManager = new RoomManager();
         this.reservationManager = new ReservationManager();
 
-//        this.lbl_welcome.setText("Welcome " + user.getUsername());
+        this.lbl_welcome.setText("Welcome " + user.getUsername());
         loadComponent();
         loadHotelTable();
         loadHotelComponent();
@@ -273,7 +273,9 @@ public class EmployeeView extends Layout {
         this.hotel_menu.add("Update").addActionListener(e ->{
 
             int selectHotelId = this.getTableSelectedRow(tbl_hotel, 0);
-            HotelView hotelView = new HotelView(this.hotelManager.getById(selectHotelId));
+            Hotel selectedHotel = this.hotelManager.getById(selectHotelId);
+            HotelView hotelView = new HotelView(selectedHotel);
+
             hotelView.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) { //Tables that need to be updated dynamically
@@ -312,7 +314,7 @@ public class EmployeeView extends Layout {
 //    }
 
     private void loadHotelTable()  {
-        Object[] col_hotel  ={"ID", "Name", "City", "Region", "Address", "Mail", "Star",
+        Object[] col_hotel  ={"ID", "Name", "City", "Region", "Address", "Phone", "Star",
                 "Car Park", "Spa", "Room Service", "Pool", "Wifi", "Fitness","Concierge"};
         ArrayList<Object[]> hotelList = this.hotelManager.getForTable(col_hotel.length, this.hotelManager.findAll());
         this.createTable(this.tmdl_hotel, this.tbl_hotel, col_hotel, hotelList);

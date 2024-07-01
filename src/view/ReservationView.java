@@ -226,7 +226,6 @@ public class ReservationView extends Layout {
 
     public void setHotelValues(Reservation reservation) {
         Room room = this.roomManager.getById(reservation.getRoomId());
-//        Hotel hotel = this.hotelManager.getById(reservation.getRoomId());
 
         this.fld_hotel.setText(room.getHotel().getHotel_name());
         this.fld_pension_type.setText(room.getPension().getPensionType());
@@ -234,55 +233,66 @@ public class ReservationView extends Layout {
         this.fld_checkin.setText(reservation.getCheckInDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         this.fld_checkout.setText(reservation.getCheckOutDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
 
+        // Room features
         boolean isTvAvailable = room.isRoom_tv();
-        String tvStatus = Helper.Utils.booleanToYesNoWithPrefix(isTvAvailable, "tv");
-        this.txta_room_features.setText(tvStatus);
+        String tvStatus = Helper.Utils.booleanToYesNoWithPrefix(isTvAvailable, "TV: ");
 
         boolean isMinibarAvailable = room.isRoom_minibar();
-        String minibarStatus = Helper.Utils.booleanToYesNoWithPrefix(isMinibarAvailable, "Minibar");
-        this.txta_room_features.setText(minibarStatus);
+        String minibarStatus = Helper.Utils.booleanToYesNoWithPrefix(isMinibarAvailable, "Minibar: ");
 
         boolean isGameConsoleAvailable = room.isRoom_game_console();
-        String gameConsoleStatus = Helper.Utils.booleanToYesNoWithPrefix(isGameConsoleAvailable, "Game console");
-        this.txta_room_features.setText(gameConsoleStatus);
+        String gameConsoleStatus = Helper.Utils.booleanToYesNoWithPrefix(isGameConsoleAvailable, "Game Console: ");
 
         boolean isSafeboxAvailable = room.isRoom_safebox();
-        String safeboxStatus = Helper.Utils.booleanToYesNoWithPrefix(isSafeboxAvailable, "safebox");
-        this.txta_room_features.setText(safeboxStatus);
+        String safeboxStatus = Helper.Utils.booleanToYesNoWithPrefix(isSafeboxAvailable, "Safebox: ");
 
         boolean isProjectionAvailable = room.isRoom_projection();
-        String projectionStatus = Helper.Utils.booleanToYesNoWithPrefix(isProjectionAvailable, "Projection");
-        this.txta_room_features.setText(projectionStatus);
+        String projectionStatus = Helper.Utils.booleanToYesNoWithPrefix(isProjectionAvailable, "Projection: ");
 
+        StringBuilder roomFeaturesBuilder = new StringBuilder();
+        roomFeaturesBuilder.append(tvStatus).append("\n");
+        roomFeaturesBuilder.append(minibarStatus).append("\n");
+        roomFeaturesBuilder.append(gameConsoleStatus).append("\n");
+        roomFeaturesBuilder.append(safeboxStatus).append("\n");
+        roomFeaturesBuilder.append(projectionStatus);
 
+        this.txta_room_features.setText(roomFeaturesBuilder.toString());
 
+        // Hotel features
+        Hotel hotel = room.getHotel();
+        boolean isCarparkAvailable = hotel.isHotel_carpark();
+        String carparkStatus = Helper.Utils.booleanToYesNoWithPrefix(isCarparkAvailable, "Carpark: ");
 
-//        boolean isCarparkAvailable = hotel.isHotel_carpark();
-//        String carparkStatus = Helper.Utils.booleanToYesNoWithPrefix(isCarparkAvailable, "Carpark");
-//        this.txta_hotel_features.setText(carparkStatus);
-//
-//        boolean isSpaAvailable = hotel.isHotel_spa();
-//        String spaStatus = Helper.Utils.booleanToYesNoWithPrefix(isSpaAvailable, "Spa");
-//        this.txta_hotel_features.setText(spaStatus);
-//
-//        boolean isPoolAvailable = hotel.isHotel_pool();
-//        String poolStatus = Helper.Utils.booleanToYesNoWithPrefix(isPoolAvailable, "Pool");
-//        this.txta_hotel_features.setText(poolStatus);
-//
-//        boolean isWifiAvailable = hotel.isHotel_wifi();
-//        String wifiStatus = Helper.Utils.booleanToYesNoWithPrefix(isWifiAvailable, "Wifi");
-//        this.txta_hotel_features.setText(wifiStatus);
-//
-//        boolean isFitnessAvailable = hotel.isHotel_fitness();
-//        String fitnessStatus = Helper.Utils.booleanToYesNoWithPrefix(isFitnessAvailable, "Fitness");
-//        this.txta_hotel_features.setText(fitnessStatus);
-//
-//        boolean isConciergeAvailable = hotel.isHotel_concierge();
-//        String conciergeStatus = Helper.Utils.booleanToYesNoWithPrefix(isConciergeAvailable, "Concierge");
-//        this.txta_hotel_features.setText(conciergeStatus);
+        boolean isSpaAvailable = hotel.isHotel_spa();
+        String spaStatus = Helper.Utils.booleanToYesNoWithPrefix(isSpaAvailable, "Spa: ");
 
+        boolean isPoolAvailable = hotel.isHotel_pool();
+        String poolStatus = Helper.Utils.booleanToYesNoWithPrefix(isPoolAvailable, "Pool: ");
 
+        boolean isWifiAvailable = hotel.isHotel_wifi();
+        String wifiStatus = Helper.Utils.booleanToYesNoWithPrefix(isWifiAvailable, "Wifi: ");
 
+        boolean isFitnessAvailable = hotel.isHotel_fitness();
+        String fitnessStatus = Helper.Utils.booleanToYesNoWithPrefix(isFitnessAvailable, "Fitness: ");
+
+        boolean isConciergeAvailable = hotel.isHotel_concierge();
+        String conciergeStatus = Helper.Utils.booleanToYesNoWithPrefix(isConciergeAvailable, "Concierge: ");
+
+        boolean isRoomServiceAvailable = hotel.isHotel_room_service();
+        String roomServiceStatus = Helper.Utils.booleanToYesNoWithPrefix(isRoomServiceAvailable, "Room Service: ");
+
+        StringBuilder hotelFeaturesBuilder = new StringBuilder();
+        hotelFeaturesBuilder.append(carparkStatus).append("\n");
+        hotelFeaturesBuilder.append(spaStatus).append("\n");
+        hotelFeaturesBuilder.append(poolStatus).append("\n");
+        hotelFeaturesBuilder.append(wifiStatus).append("\n");
+        hotelFeaturesBuilder.append(fitnessStatus).append("\n");
+        hotelFeaturesBuilder.append(conciergeStatus).append("\n");
+        hotelFeaturesBuilder.append(roomServiceStatus);
+
+        this.txta_hotel_features.setText(hotelFeaturesBuilder.toString());
+
+        // Disable text areas and fields
         this.fld_hotel.setEnabled(false);
         this.fld_pension_type.setEnabled(false);
         this.fld_room_type.setEnabled(false);

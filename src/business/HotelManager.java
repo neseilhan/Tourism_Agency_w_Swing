@@ -63,7 +63,7 @@ public class HotelManager {
             rowObject[i++] = obj.getHotel_city();
             rowObject[i++] = obj.getHotel_region();
             rowObject[i++] = obj.getHotel_address();
-            rowObject[i++] = obj.getHotel_mail();
+            rowObject[i++] = obj.getHotel_phone();
             rowObject[i++] = obj.getHotel_star();
             rowObject[i++] = obj.isHotel_carpark();
             rowObject[i++] = obj.isHotel_spa();
@@ -100,5 +100,6 @@ public class HotelManager {
         }
         return hotelPensionRowList;
     }
+
 
 }

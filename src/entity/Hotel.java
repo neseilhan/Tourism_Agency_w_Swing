@@ -6,7 +6,7 @@ public class Hotel {
     private String hotel_city;
     private String hotel_region;
     private String hotel_address;
-    private String hotel_mail;
+    private String hotel_phone;
     private String hotel_star;
     private boolean hotel_carpark;
     private boolean hotel_spa;
@@ -18,13 +18,13 @@ public class Hotel {
 
 
 
-    public Hotel(int id, String hotel_name, String hotel_city, String hotel_region, String hotel_address, String hotel_mail, String hotel_star, boolean hotel_carpark, boolean hotel_spa, boolean hotel_room_service, boolean hotel_pool, boolean hotel_wifi, boolean hotel_fitness, boolean hotel_concierge) {
+    public Hotel(int id, String hotel_name, String hotel_city, String hotel_region, String hotel_address, String hotel_phone, String hotel_star, boolean hotel_carpark, boolean hotel_spa, boolean hotel_room_service, boolean hotel_pool, boolean hotel_wifi, boolean hotel_fitness, boolean hotel_concierge) {
         this.id = id;
         this.hotel_name = hotel_name;
         this.hotel_city = hotel_city;
         this.hotel_region = hotel_region;
         this.hotel_address = hotel_address;
-        this.hotel_mail = hotel_mail;
+        this.hotel_phone = hotel_phone;
         this.hotel_star = hotel_star;
         this.hotel_carpark = hotel_carpark;
         this.hotel_spa = hotel_spa;
@@ -78,12 +78,12 @@ public class Hotel {
         this.hotel_address = hotel_address;
     }
 
-    public String getHotel_mail() {
-        return hotel_mail;
+    public String getHotel_phone() {
+        return hotel_phone;
     }
 
-    public void setHotel_mail(String hotel_mail) {
-        this.hotel_mail = hotel_mail;
+    public void setHotel_phone(String hotel_phone) {
+        this.hotel_phone = hotel_phone;
     }
 
     public String getHotel_star() {
@@ -158,7 +158,7 @@ public class Hotel {
                 ", hotel_city='" + hotel_city + '\'' +
                 ", hotel_region='" + hotel_region + '\'' +
                 ", hotel_address='" + hotel_address + '\'' +
-                ", hotel_mail='" + hotel_mail + '\'' +
+                ", hotel_phone='" + hotel_phone + '\'' +
                 ", hotel_star='" + hotel_star + '\'' +
                 ", hotel_carpark=" + hotel_carpark +
                 ", hotel_spa=" + hotel_spa +
