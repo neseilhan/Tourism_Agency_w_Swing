@@ -9,6 +9,7 @@ Reservation Management: Add, update, delete and search reservations.
 Different User Roles: Separate administration panels for Admin and Worker roles.
 
 Used technologies :
+
 Java
 Swing GUI
 PostgreSQL
