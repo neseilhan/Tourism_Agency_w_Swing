@@ -22,7 +22,7 @@ Set up database:
 Install and run PostgreSQL.
 Update the database connection information in the src/core/Db.java file according to your own PostgreSQL settings.
 Create your database using the turizm.sql file in the GitHub repository and return it with the following commands.
-psql -U postgres -f tourismAgency.sql
+psql -U postgres -f turizm.sql
 
 Compile and Run the Project:
 
