@@ -81,7 +81,7 @@ public class HotelView extends Layout {
 
         this.btn_save_hotel.addActionListener(e -> {
 
-            // Pension türlerini kontrol etmek için
+            //To controle pension types.
             boolean isPensionEmpty = true;
             if (ultraAllInclusiveRadiobutton.isSelected() ||
                     allInclusiveRadioButton.isSelected() ||
@@ -92,7 +92,7 @@ public class HotelView extends Layout {
                     excludingAlcoholFullCreditRadioButton.isSelected()) {
                 isPensionEmpty = false;
             }
-            // Season seçimlerini kontrol etmek için
+            //To controle season choices.
             boolean isSeasonEmpty = true;
             if (summerRadioButton.isSelected() || winterRadioButton.isSelected()) {
                 isSeasonEmpty = false;
@@ -105,7 +105,7 @@ public class HotelView extends Layout {
             } else {
                 boolean result = false;
 
-                // Update hotel object with UI inputs
+                //Update hotel object with UI inputs
                 this.hotel.setHotel_name(fld_hotel_name.getText());
                 this.hotel.setHotel_city(fld_hotel_city.getText());
                 this.hotel.setHotel_region(fld_hotel_region.getText());
@@ -122,23 +122,23 @@ public class HotelView extends Layout {
 
                 int hotelId = this.hotel.getId();
 
-                // Determine if the hotel already exists (has an ID) or is new (ID is 0)
+                //Determine if the hotel already exists (has an ID) or is new (ID is 0)
                 if (hotelId == 0) {
-                    // Save new hotel
+                    //Save new hotel
                     hotelId = this.hotelManager.saveAndGetHotelId(this.hotel);
 
                     if (hotelId != 0) {
-//                        // Add Pension and Season for new hotel
+//                        //Add Pension and Season for new hotel
                         savePension(hotelId);
                         saveSeason(hotelId);
                         result = true;
                     }
                 } else {
-                    // Update existing hotel
+                    //Update existing hotel
                     result = this.hotelManager.update(this.hotel);
 
                     if (result) {
-                        // Update Pension and Season if needed
+                        //Update Pension and Season if needed
 //                        savePension(hotelId);
 //                        saveSeason(hotelId);
                     }
@@ -146,7 +146,7 @@ public class HotelView extends Layout {
 
                 if (result) {
                     Helper.showMsg("Hotel information saved successfully.");
-                    dispose(); // Close the window after successful save or update
+                    dispose(); //Close the window after successful save or update
                 } else {
                     Helper.showMsg("Error occurred while saving hotel information.");
                 }
@@ -200,7 +200,7 @@ public class HotelView extends Layout {
             }
         }
 
-//        // Populate season checkboxes based on existing data
+//        //Populate season checkboxes based on existing data
         ArrayList<Season> seasons = this.seasonManager.getByHotelId(this.hotel.getId());
         for (Season season : seasons) {
             switch (season.getSeasonName()) {

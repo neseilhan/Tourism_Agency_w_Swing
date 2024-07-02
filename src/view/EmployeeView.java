@@ -87,13 +87,21 @@ public class EmployeeView extends Layout {
         this.reservationManager = new ReservationManager();
 
         this.lbl_welcome.setText("Welcome " + user.getUsername());
+        //Employee Tab
         loadComponent();
+
+        //Hotel Tab
         loadHotelTable();
         loadHotelComponent();
+
+        //Room Tab
         loadRoomTable(null);
+        loadRoomComponent();
+
+        //Reservation Tab
         loadReservationTable();
         loadReservationComponent();
-      //  loadRoomComponent();
+
 
         for (Hotel hotel : this.hotelManager.findAll()) {
             this.cmb_filter_hotel.addItem(new ComboItem(hotel.getId(), hotel.getHotel_name()));
@@ -162,47 +170,8 @@ public class EmployeeView extends Layout {
                 LoginView  loginView = new LoginView();
             }
         });
-        this.btn_room_add.addActionListener(e -> {
-            RoomView roomView = new RoomView(new Room());
-            roomView.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    loadRoomTable(null);
-                }
-            });
-        });
-        this.btn_search.addActionListener(e -> {
-            String selectedCity = null;
-            String selectedHotel = null;
-            String filterStartDate = null;
-            String filterEndDate = null;
-            int filterBed = 0;
 
-            if (!this.fld_filter_bed.getText().isEmpty() && this.fld_filter_bed.getText() != null) {
-                filterBed = Integer.parseInt(this.fld_filter_bed.getText());
-            }
-            if (this.cmb_filter_city.getSelectedItem() != null) {
-                selectedCity = ((ComboItem)this.cmb_filter_city.getSelectedItem()).getValue();
-            }
-            if (this.cmb_filter_hotel.getSelectedItem() != null) {
-                selectedHotel = ((ComboItem)this.cmb_filter_hotel.getSelectedItem()).getValue();
-            }
 
-            if (this.fld_filter_checkin != null && !this.fld_filter_checkin.getText().isEmpty()){
-                if (Helper.isValidDate(fld_filter_checkin.getText(), ("dd.MM.yyyy"))) {
-                    filterStartDate = fld_filter_checkin.getText();
-                }
-            }
-            if (this.fld_filter_checkout != null && !this.fld_filter_checkout.getText().isEmpty()){
-                if (Helper.isValidDate(fld_filter_checkout.getText(), ("dd.MM.yyyy"))) {
-                    filterEndDate = fld_filter_checkout.getText();
-                }
-            }
-
-            ArrayList<Room> roomListBySearch = this.roomManager.searchForRooms(filterStartDate, filterEndDate, selectedCity, selectedHotel, filterBed);
-            ArrayList<Object[]> roomRowListBySearch = this.roomManager.getForTable(this.col_room.length, roomListBySearch);
-            loadRoomTable(roomRowListBySearch);
-        });
         this.btn_res_add.addActionListener(e -> {
             if (this.fld_filter_checkin.getText().isEmpty() || this.fld_filter_checkout.getText().isEmpty()) {
                 Helper.showMsg("Please fill Check-in and Check-out date");
@@ -254,6 +223,49 @@ public class EmployeeView extends Layout {
         tbl_room.setModel(tmdl_room);
         tbl_room.setEnabled(true);
 
+    }
+    public void loadRoomComponent(){
+        this.btn_room_add.addActionListener(e -> {
+            RoomView roomView = new RoomView(new Room());
+            roomView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadRoomTable(null);
+                }
+            });
+        });
+        this.btn_search.addActionListener(e -> {
+            String selectedCity = null;
+            String selectedHotel = null;
+            String filterStartDate = null;
+            String filterEndDate = null;
+            int filterBed = 0;
+
+            if (!this.fld_filter_bed.getText().isEmpty() && this.fld_filter_bed.getText() != null) {
+                filterBed = Integer.parseInt(this.fld_filter_bed.getText());
+            }
+            if (this.cmb_filter_city.getSelectedItem() != null) {
+                selectedCity = ((ComboItem)this.cmb_filter_city.getSelectedItem()).getValue();
+            }
+            if (this.cmb_filter_hotel.getSelectedItem() != null) {
+                selectedHotel = ((ComboItem)this.cmb_filter_hotel.getSelectedItem()).getValue();
+            }
+
+            if (this.fld_filter_checkin != null && !this.fld_filter_checkin.getText().isEmpty()){
+                if (Helper.isValidDate(fld_filter_checkin.getText(), ("dd.MM.yyyy"))) {
+                    filterStartDate = fld_filter_checkin.getText();
+                }
+            }
+            if (this.fld_filter_checkout != null && !this.fld_filter_checkout.getText().isEmpty()){
+                if (Helper.isValidDate(fld_filter_checkout.getText(), ("dd.MM.yyyy"))) {
+                    filterEndDate = fld_filter_checkout.getText();
+                }
+            }
+
+            ArrayList<Room> roomListBySearch = this.roomManager.searchForRooms(filterStartDate, filterEndDate, selectedCity, selectedHotel, filterBed);
+            ArrayList<Object[]> roomRowListBySearch = this.roomManager.getForTable(this.col_room.length, roomListBySearch);
+            loadRoomTable(roomRowListBySearch);
+        });
     }
     public void loadHotelComponent(){
 

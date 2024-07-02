@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c6a8676-1819-4b0a-99cd-a44cede6a62a" name="Changes" comment="Reservation tab can list reservations and can be deleted and updated.">
+    <list default="true" id="8c6a8676-1819-4b0a-99cd-a44cede6a62a" name="Changes" comment="some needs added.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/business/HotelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/HotelManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/business/PensionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/PensionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/business/SeasonManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/SeasonManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/HotelDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/HotelDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/PensionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/PensionDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/SeasonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/SeasonDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Hotel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/EmployeeView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EmployeeView.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/EmployeeView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EmployeeView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HotelView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HotelView.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/HotelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HotelView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ReservationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ReservationView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/turizm.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719783336230</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="some needs added.">
+      <option name="closed" value="true" />
+      <created>1719876660822</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1719876660822</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -163,6 +160,7 @@
     <MESSAGE value="pension and season info listed and linked to hotel info." />
     <MESSAGE value="Room tab finished, rooms are listed and can be searched." />
     <MESSAGE value="Reservation tab can list reservations and can be deleted and updated." />
-    <option name="LAST_COMMIT_MESSAGE" value="Reservation tab can list reservations and can be deleted and updated." />
+    <MESSAGE value="some needs added." />
+    <option name="LAST_COMMIT_MESSAGE" value="some needs added." />
   </component>
 </project>
