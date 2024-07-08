@@ -39,10 +39,15 @@ Layered Architecture
 ## The project is developed using layered architecture and is divided into the following packages:
 
 **entity**: Contains entity classes corresponding to database tables.
+
 **business**: Contains business logic and service layer.
+
 **dao**: Contains database access objects (Data Access Objects).
+
 **view**: Contains user interface components.
+
 **core**: Contains helper classes and general configurations.
+
 
 ## Application Screens and Descriptions
 
