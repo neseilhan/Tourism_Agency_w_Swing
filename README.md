@@ -18,7 +18,7 @@
 
 ```bash
 git clone https://github.com/neseilhan/Tourism_Agency_w_Swing.git
-```bash
+```
 
 Set up database:
 
