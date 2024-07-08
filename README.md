@@ -1,20 +1,22 @@
-Tourism Agency Management System
+# Tourism Agency Management System
 
-Features :
+## Features
 
-User Management: Adding, updating, deleting and searching users.
-Hotel Management: Adding, updating, deleting and searching hotels.
-Room Management: Add, update, delete and search rooms.
-Reservation Management: Add, update, delete and search reservations.
-Different User Roles: Separate administration panels for Admin and Worker roles.
+- **User Management**: Adding, updating, deleting, and searching users.
+- **Hotel Management**: Adding, updating, deleting, and searching hotels.
+- **Room Management**: Add, update, delete, and search rooms.
+- **Reservation Management**: Add, update, delete, and search reservations.
+- **Different User Roles**: Separate administration panels for Admin and Worker roles.
 
-Used technologies :
+## Used Technologies
 
-Java
-Swing GUI
-PostgreSQL
+- **Java**
+- **Swing GUI**
+- **PostgreSQL**
 
-Clone the project:
+## Clone the Project
+
+```bash
 git clone https://github.com/neseilhan/Tourism_Agency_w_Swing.git
 
 Set up database:
