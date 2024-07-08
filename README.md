@@ -25,7 +25,9 @@ git clone https://github.com/neseilhan/Tourism_Agency_w_Swing.git
 Install and run PostgreSQL.
 Update the database connection information in the src/core/Db.java file according to your own PostgreSQL settings.
 Create your database using the turizm.sql file in the GitHub repository and return it with the following commands.
+```bash
 psql -U postgres -f turizm.sql
+````
 
 ## Compile and Run the Project
 
@@ -36,11 +38,11 @@ Layered Architecture
 
 ## The project is developed using layered architecture and is divided into the following packages:
 
-entity: Contains entity classes corresponding to database tables.
-business: Contains business logic and service layer.
-dao: Contains database access objects (Data Access Objects).
-view: Contains user interface components.
-core: Contains helper classes and general configurations.
+**entity**: Contains entity classes corresponding to database tables.
+**business**: Contains business logic and service layer.
+**dao**: Contains database access objects (Data Access Objects).
+**view**: Contains user interface components.
+**core**: Contains helper classes and general configurations.
 
 ## Application Screens and Descriptions
 
